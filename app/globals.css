@@ -1,26 +1,414 @@
 @import "tailwindcss";
 
+/* ============================================
+   MUHSIN ADAM MNARO - YOUNG-GRAPHIX PORTFOLIO
+   Design System: Refined Minimal
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors - Minimal Palette with Red Accent */
+  --bg: #FAFAF9;
+  --bg-secondary: #F5F5F4;
+  --text: #1A1A1A;
+  --text-secondary: #525252;
+  --text-muted: #9A9A9A;
+  --accent: #C41E3A;
+  --accent-hover: #A31830;
+  --accent-light: #E8364F;
+  --border: #E8E8E6;
+  --border-hover: #D4D4D2;
+
+  /* Typography */
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-dm-sans);
+
+  /* Transitions */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 0.3s;
+  --duration-slow: 0.5s;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-border: var(--border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================
+   INFINITE SCROLL GALLERY
+   ============================================ */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
+.gallery-track {
+  display: flex;
+  width: fit-content;
+  animation: scroll 30s linear infinite;
+}
+
+.gallery-track:hover {
+  animation-play-state: running;
+  animation-duration: 60s;
+}
+
+.gallery-paused {
+  animation-play-state: paused;
+}
+
+/* ============================================
+   BASE
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.heading-xl {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.heading-lg {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+}
+
+.heading-md {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+}
+
+.text-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.text-small {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.text-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   SUBTLE ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--duration-slow) var(--ease) forwards;
+  opacity: 0;
+}
+
+.animate-fade-up {
+  animation: fadeUp var(--duration-slow) var(--ease) forwards;
+  opacity: 0;
+}
+
+.animate-slide-in {
+  animation: slideIn var(--duration-slow) var(--ease) forwards;
+  opacity: 0;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-slow) var(--ease) forwards;
+  opacity: 0;
+}
+
+/* Stagger delays */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+
+/* ============================================
+   MICRO-INTERACTIONS
+   ============================================ */
+
+/* Subtle link underline */
+.link-subtle {
+  position: relative;
+  color: var(--text);
+  transition: color var(--duration) var(--ease);
+}
+
+.link-subtle::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width var(--duration) var(--ease);
+}
+
+.link-subtle:hover {
+  color: var(--accent);
+}
+
+.link-subtle:hover::after {
+  width: 100%;
+}
+
+/* Accent link */
+.link-accent {
+  color: var(--accent);
+  transition: opacity var(--duration) var(--ease);
+}
+
+.link-accent:hover {
+  opacity: 0.7;
+}
+
+/* Image hover */
+.img-hover {
+  overflow: hidden;
+}
+
+.img-hover img {
+  transition: transform var(--duration-slow) var(--ease);
+}
+
+.img-hover:hover img {
+  transform: scale(1.03);
+}
+
+/* Card hover */
+.card-hover {
+  transition: border-color var(--duration) var(--ease);
+}
+
+.card-hover:hover {
+  border-color: var(--border-hover);
+}
+
+/* Button base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all var(--duration) var(--ease);
+}
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  border: 1px solid var(--text);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--text);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text);
+}
+
+/* ============================================
+   FORM INPUTS
+   ============================================ */
+
+input, textarea, select {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  background: transparent;
+  color: var(--text);
+  transition: border-color var(--duration) var(--ease);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--text);
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 3rem;
+  }
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+}
+
+/* Accent dot */
+.dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* Line */
+.line {
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background: var(--border);
+  transition: width var(--duration) var(--ease), background var(--duration) var(--ease);
+}
+
+.group:hover .line {
+  width: 3rem;
+  background: var(--accent);
+}
+
+/* Vertical text */
+.writing-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Side scroll indicator animation */
+@keyframes scrollLineMove {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scroll-line-animate {
+  animation: scrollLineMove 2s var(--ease) infinite;
 }
