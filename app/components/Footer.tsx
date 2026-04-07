@@ -1,35 +1,41 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
+interface Social {
+  id: string;
+  platform: string;
+  url: string;
+}
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [socials, setSocials] = useState<Social[]>([]);
+
+  useEffect(() => {
+    fetch("/api/socials")
+      .then((res) => res.json())
+      .then((data) => setSocials(data))
+      .catch(() => {});
+  }, []);
 
   return (
-    <footer className="py-8 md:py-12 border-t border-[var(--border)]">
-      <div className="container">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
-          {/* Logo */}
-          <a href="#" className="text-base md:text-lg font-[family-name:var(--font-playfair)] text-[var(--text)]">
-            Young<span className="text-[var(--accent)]">.</span>graphix
+    <footer className="flex flex-col md:flex-row justify-between items-center gap-4 px-4 md:px-8 lg:px-12 py-6"
+      style={{ borderTop: "1px solid rgba(230,57,70,0.1)", fontSize: "0.75rem", color: "var(--cream-muted)" }}>
+      <span>Young_graphic123 &copy; {currentYear}. All rights reserved.</span>
+      <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+        {socials.filter((s) => s.url).map((social) => (
+          <a
+            key={social.id}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red transition-colors duration-300"
+            style={{ fontSize: "0.6rem", letterSpacing: "3px", textTransform: "uppercase" }}
+          >
+            {social.platform}
           </a>
-
-          {/* Nav Links */}
-          <nav className="flex items-center gap-4 md:gap-6">
-            {[{ label: "Works", href: "#works" }, { label: "About", href: "#about" }, { label: "Contact", href: "#contact" }].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-xs md:text-small text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Copyright */}
-          <p className="text-xs md:text-small text-[var(--text-muted)]">
-            &copy; {currentYear} Muhsin Adam Mnaro
-          </p>
-        </div>
+        ))}
       </div>
     </footer>
   );

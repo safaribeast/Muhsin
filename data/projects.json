@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "tag": "Identity Design",
+    "title": "NEON NEXUS",
+    "description": "Identity system for a future-tech startup.",
+    "image": "/images/works/project-1.jpeg"
+  },
+  {
+    "id": "2",
+    "tag": "UI/UX",
+    "title": "VANGUARD UI",
+    "description": "High-fidelity dashboard for creative teams.",
+    "image": "/images/works/project-2.jpeg"
+  },
+  {
+    "id": "3",
+    "tag": "Editorial",
+    "title": "TYPOGRAPHY UNLEASHED",
+    "description": "Experimental editorial exploring weight and motion.",
+    "image": "/images/works/project-3.jpeg"
+  },
+  {
+    "id": "4",
+    "tag": "Branding",
+    "title": "PROJECT FOUR",
+    "description": "Visual identity and brand system design.",
+    "image": "/images/works/project-4.jpeg"
+  }
+]

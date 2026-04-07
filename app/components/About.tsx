@@ -1,93 +1,63 @@
 "use client";
 
 export default function About() {
-  const services = [
-    {
-      title: "Brand Identity",
-      description: "Logos, color systems, typography, and brand guidelines.",
-    },
-    {
-      title: "Print Design",
-      description: "Posters, brochures, packaging, and marketing materials.",
-    },
-    {
-      title: "Digital Design",
-      description: "Social media graphics, event flyers, and promotional artwork.",
-    },
-  ];
-
   return (
-    <section id="about" className="py-16 md:py-24 lg:py-32 bg-[var(--bg-secondary)]">
-      <div className="container">
-        {/* Main Content */}
-        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 lg:gap-24">
-          {/* Image */}
-          <div className="lg:order-2">
-            <div className="aspect-[4/5] max-w-sm mx-auto lg:max-w-none bg-[var(--border)]">
-              <img
-                src="/images/hero-profile.jpeg"
-                alt="Muhsin Adam Mnaro"
-                className="w-full h-full object-cover"
-              />
+    <section id="about" className="py-12 md:py-20 lg:py-28 px-4 md:px-8 lg:px-12">
+      <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-20">
+        {/* Left - Text */}
+        <div className="flex-1">
+          <span className="reveal" style={{ fontSize: "0.65rem", letterSpacing: "5px", textTransform: "uppercase", color: "var(--red)", marginBottom: "1rem", display: "block" }}>
+            About Me
+          </span>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(2rem, 5vw, 4rem)", lineHeight: 1.1, marginBottom: "1rem" }}>
+            Who is <em style={{ fontStyle: "italic", color: "var(--red)" }}>Muhsin?</em>
+          </h2>
+          <p className="reveal reveal-d2" style={{ color: "var(--cream-dim)", fontSize: "clamp(0.9rem, 2vw, 1.05rem)", lineHeight: 1.9, fontWeight: 300, marginBottom: "2rem" }}>
+            Beyond the screen, I&apos;m an architect of narratives. Based in the
+            digital ether, I specialize in crafting visual languages that help
+            brands cut through the noise.
+          </p>
+
+          <div className="flex flex-col" style={{ gap: "1.5rem" }}>
+            <div className="flex items-start reveal reveal-d3" style={{ gap: "1rem" }}>
+              <div className="flex items-center justify-center shrink-0" style={{ width: "40px", height: "40px", border: "1px solid var(--red)", color: "var(--red)", fontSize: "1rem" }}>
+                &#9670;
+              </div>
+              <div>
+                <h4 style={{ fontSize: "0.85rem", letterSpacing: "2px", textTransform: "uppercase", marginBottom: "0.3rem" }}>
+                  Storytelling
+                </h4>
+                <p style={{ color: "var(--cream-dim)", fontSize: "0.85rem", fontWeight: 300 }}>
+                  Design that narrates a brand&apos;s core values.
+                </p>
+              </div>
             </div>
-          </div>
-
-          {/* Content */}
-          <div className="lg:order-1 text-center lg:text-left">
-            <span className="text-label mb-2 md:mb-3 block">About</span>
-            <h2 className="heading-lg mb-6 md:mb-8">
-              Creating visual stories that connect and inspire.
-            </h2>
-
-            <div className="space-y-4 md:space-y-5 text-body text-sm md:text-base mb-8 md:mb-10 max-w-md mx-auto lg:mx-0">
-              <p>
-                I&apos;m Muhsin Adam Mnaro, a graphic designer based in Arusha,
-                Tanzania. Known as Young-graphix, I specialize in creating visual
-                identities that help brands tell their story.
-              </p>
-              <p>
-                My approach is simple: understand the story, then design with
-                intention. Every project is an opportunity to create something
-                meaningful that resonates with its audience.
-              </p>
-              <p>
-                Drawing from East African culture and contemporary design trends,
-                I craft work that feels both timeless and relevant.
-              </p>
+            <div className="flex items-start reveal reveal-d4" style={{ gap: "1rem" }}>
+              <div className="flex items-center justify-center shrink-0" style={{ width: "40px", height: "40px", border: "1px solid var(--red)", color: "var(--red)", fontSize: "1rem" }}>
+                &#9670;
+              </div>
+              <div>
+                <h4 style={{ fontSize: "0.85rem", letterSpacing: "2px", textTransform: "uppercase", marginBottom: "0.3rem" }}>
+                  Branding
+                </h4>
+                <p style={{ color: "var(--cream-dim)", fontSize: "0.85rem", fontWeight: 300 }}>
+                  Creating icons that stand the test of time.
+                </p>
+              </div>
             </div>
-
-            <a href="#contact" className="btn btn-primary text-sm md:text-base">
-              Work With Me
-            </a>
           </div>
         </div>
 
-        {/* Services */}
-        <div className="mt-16 md:mt-24 pt-12 md:pt-16 border-t border-[var(--border)]">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-8 md:mb-12 text-center md:text-left">
-            <div>
-              <span className="text-label mb-2 md:mb-3 block">Services</span>
-              <h3 className="heading-md">What I do</h3>
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            {services.map((service, index) => (
-              <div
-                key={service.title}
-                className="group pb-6 md:pb-8 border-b border-[var(--border)] text-center sm:text-left"
-              >
-                <span className="text-xs md:text-small text-[var(--text-muted)] mb-3 md:mb-4 block">
-                  0{index + 1}
-                </span>
-                <h4 className="text-base md:text-lg font-[family-name:var(--font-playfair)] text-[var(--text)] mb-2 md:mb-3 group-hover:text-[var(--accent)] transition-colors">
-                  {service.title}
-                </h4>
-                <p className="text-xs md:text-small text-[var(--text-secondary)]">
-                  {service.description}
-                </p>
-              </div>
-            ))}
+        {/* Right - Image Frame */}
+        <div className="flex-1 w-full max-w-md lg:max-w-none reveal">
+          <div className="relative w-full" style={{ aspectRatio: "3/4", border: "1px solid rgba(230,57,70,0.2)" }}>
+            <div className="absolute hidden sm:block" style={{ top: "-15px", right: "-15px", bottom: "15px", left: "15px", border: "1px solid var(--red)", zIndex: -1 }} />
+            <img
+              alt="Muhsin - Portrait"
+              className="w-full h-full object-cover hover:grayscale-0 transition-all duration-500"
+              style={{ filter: "grayscale(0.5)" }}
+              src="/images/cartoon2.png"
+            />
           </div>
         </div>
       </div>

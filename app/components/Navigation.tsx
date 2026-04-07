@@ -3,16 +3,7 @@
 import { useState, useEffect } from "react";
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
@@ -22,114 +13,86 @@ export default function Navigation() {
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { href: "#works", label: "Work" },
+    { href: "#portfolio", label: "Portfolio" },
     { href: "#about", label: "About" },
+    { href: "#services", label: "Services" },
     { href: "#contact", label: "Contact" },
   ];
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "py-4 bg-[var(--bg)]/90 backdrop-blur-sm border-b border-[var(--border)]"
-            : "py-6 bg-transparent"
-        }`}
-      >
-        <div className="container flex items-center justify-between">
-          {/* Logo */}
-          <a href="#" className="group">
-            <span className="text-lg font-[family-name:var(--font-playfair)] text-[var(--text)]">
-              Young<span className="text-[var(--accent)]">.</span>graphix
-            </span>
-          </a>
+      <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-4 md:px-8 lg:px-12"
+        style={{
+          padding: undefined,
+          height: "64px",
+          background: "rgba(10,10,10,0.85)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid rgba(230,57,70,0.15)",
+        }}>
+        <a href="#" className="shrink-0" style={{ fontFamily: "var(--font-headline)", fontSize: "clamp(1rem, 3vw, 1.4rem)", letterSpacing: "3px", color: "var(--cream)" }}>
+          YOUNG<span style={{ color: "var(--red)" }}>_</span>GRAPHIC<span style={{ color: "var(--red)" }}>123</span>
+        </a>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-small text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors link-subtle"
-              >
-                {link.label}
-              </a>
-            ))}
-            <a href="#contact" className="btn btn-primary text-xs py-2.5 px-5">
-              Let&apos;s Talk
+        <div className="hidden md:flex items-center" style={{ gap: "2rem" }}>
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="hover:text-red transition-colors duration-300"
+              style={{ fontSize: "0.75rem", letterSpacing: "3px", textTransform: "uppercase", color: "var(--cream-dim)" }}
+            >
+              {link.label}
             </a>
-          </div>
-
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2"
-            aria-label="Toggle menu"
+          ))}
+          <a
+            href="#contact"
+            className="btn-fill-hover hover:text-[var(--black)] relative z-[1]"
+            style={{
+              padding: "0.5rem 1.5rem",
+              border: "1px solid var(--red)",
+              color: "var(--red)",
+              fontSize: "0.7rem",
+              letterSpacing: "3px",
+              textTransform: "uppercase",
+              transition: "0.3s",
+            }}
           >
-            <div className="w-5 h-4 flex flex-col justify-between">
-              <span
-                className={`block h-[1.5px] bg-[var(--text)] transition-all duration-300 ${
-                  isMobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
-                }`}
-              />
-              <span
-                className={`block h-[1.5px] bg-[var(--text)] transition-all duration-300 ${
-                  isMobileMenuOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`block h-[1.5px] bg-[var(--text)] transition-all duration-300 ${
-                  isMobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
-                }`}
-              />
-            </div>
-          </button>
+            Hire Me
+          </a>
         </div>
+
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden z-[200] relative flex flex-col cursor-pointer"
+          style={{ gap: "5px" }}
+          aria-label="Toggle menu"
+        >
+          <span className={`block transition-all duration-300 origin-center ${isMobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""}`}
+            style={{ width: "22px", height: "2px", background: "var(--cream)" }} />
+          <span className={`block transition-all duration-300 ${isMobileMenuOpen ? "opacity-0 scale-x-0" : ""}`}
+            style={{ width: "22px", height: "2px", background: "var(--cream)" }} />
+          <span className={`block transition-all duration-300 origin-center ${isMobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`}
+            style={{ width: "22px", height: "2px", background: "var(--cream)" }} />
+        </button>
       </nav>
 
-      {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 bg-[var(--bg)] md:hidden transition-all duration-300 ${
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`fixed inset-0 z-[150] md:hidden flex flex-col justify-center items-center transition-transform duration-500 ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        style={{ background: "var(--black)", gap: "1.5rem", transitionTimingFunction: "cubic-bezier(0.77,0,0.18,1)" }}
       >
-        <div className="container h-full flex flex-col justify-center">
-          <nav className="space-y-6">
-            {navLinks.map((link, index) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block text-3xl font-[family-name:var(--font-playfair)] text-[var(--text)] transition-all duration-300 ${
-                  isMobileMenuOpen
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-4"
-                }`}
-                style={{
-                  transitionDelay: isMobileMenuOpen ? `${index * 100}ms` : "0ms",
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <div
-            className={`mt-12 transition-all duration-300 ${
-              isMobileMenuOpen
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-4"
-            }`}
-            style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
+        {["Home", ...navLinks.map((l) => l.label)].map((label) => (
+          <a
+            key={label}
+            href={label === "Home" ? "#" : `#${label.toLowerCase()}`}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="hover:text-red transition-colors duration-300"
+            style={{ fontFamily: "var(--font-headline)", fontSize: "clamp(2rem, 6vw, 3rem)", letterSpacing: "5px", color: "var(--cream-dim)" }}
           >
-            <a
-              href="#contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="btn btn-primary"
-            >
-              Start a Project
-            </a>
-          </div>
-        </div>
+            {label.toUpperCase()}
+          </a>
+        ))}
       </div>
     </>
   );
